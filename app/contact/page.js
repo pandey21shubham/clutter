@@ -2,32 +2,64 @@
 "use client";
 
 import { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "General Inquiry",
-    message: "",
-  });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        subject: "General Inquiry",
+        message: "",
     });
-  };
+    
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormData({
+            name: "",
+            email: "",
+            subject: "General Inquiry",
+            message: ""
+        })
+        
+        // Connect this form to your backend or email service
+        // to actually deliver messages.
+        console.log("Contact form submitted:", formData);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Connect this form to your backend or email service
-    // to actually deliver messages.
-    console.log("Contact form submitted:", formData);
-  };
-
-  return (
-    <main className="mx-auto w-full max-w-6xl px-5 py-12 text-emerald-900 sm:px-8">
+        toast.success('Message Sent', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });         
+    };
+    
+    return (
+        <main className="mx-auto w-full max-w-6xl px-5 py-12 text-emerald-900 sm:px-8">
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+             />  
 
       {/* Page heading */}
       <section className="mb-12 text-center">
@@ -281,7 +313,7 @@ export default function Contact() {
                     placeholder:text-slate-700
                     hover:border-gray-500 focus:border-gray-700
                     focus:outline-none focus:ring-2 focus:ring-gray-400
-                    transition-colors duration-300"
+                    transition-colors duration-300 scrollbar-none"
               />
             </div>
 
@@ -295,6 +327,7 @@ export default function Contact() {
                 hover:drop-shadow-[0_0_12px_rgba(180,83,9,0.7)]
                 cursor-pointer sm:w-auto"
             >
+                
               <span>Send Message</span>
 
               <svg
