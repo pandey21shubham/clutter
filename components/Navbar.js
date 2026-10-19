@@ -13,10 +13,10 @@ const Navbar = () => {
         <ul className='flex justify-center items-center gap-5 font-bold text-amber-50'>
             <Link href="/"> <li className='cursor-pointer transition-all duration-300 hover:text-lime-200 hover:drop-shadow-[0_0_15px_rgba(190,242,100,0.5)]'>Home</li> </Link>
             <Link href="/about"> <li className='cursor-pointer transition-all duration-300 hover:text-lime-200 hover:drop-shadow-[0_0_15px_rgba(190,242,100,0.5)]'>About</li> </Link>
-            <Link href="/generate"> <li className='cursor-pointer transition-all duration-300 hover:text-lime-200 hover:drop-shadow-[0_0_15px_rgba(190,242,100,0.5)]'>Shorten</li> </Link>
+            <Link href="/shorten"> <li className='cursor-pointer transition-all duration-300 hover:text-lime-200 hover:drop-shadow-[0_0_15px_rgba(190,242,100,0.5)]'>Shorten</li> </Link>
             <Link href="/contact"> <li className='cursor-pointer transition-all duration-300 hover:text-lime-200 hover:drop-shadow-[0_0_15px_rgba(190,242,100,0.5)]'>Contact Us</li> </Link>
             <li className='flex gap-2'>
-                <Link href="/generate"> 
+                <Link href="/shorten"> 
                     <button className='flex items-center gap-2 bg-amber-100 hover:bg-amber-50 rounded-full p-3 cursor-pointer text-amber-900 transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(253,230,138,0.8)]'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"> <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /> <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /> </svg>
                         <span>Try Now</span>

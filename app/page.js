@@ -20,7 +20,7 @@ export default function Home() {
               Meet the most straightforward URL shortener on the internet
             </p>
             <div className='flex gap-2'>
-                <Link href="/generate"> 
+                <Link href="/shorten"> 
                     <button className='flex items-center gap-2 bg-amber-100 hover:bg-amber-50 rounded-full p-3 cursor-pointer text-amber-900 transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(253,230,138,0.8)]'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"> <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /> <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /> </svg>
                         <span>Try Now</span>
