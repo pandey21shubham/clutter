@@ -21,7 +21,7 @@ export default function Home() {
             <p className="text-amber-950 text-center">
               Meet the most straightforward URL shortener on the internet
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2 justify-center items-center">
               <Link href="/shorten">
                 <button className="flex items-center gap-2 bg-amber-100 hover:bg-amber-50 rounded-full p-1 lg:p-3 cursor-pointer text-amber-900 transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(253,230,138,0.8)]">
                   <svg
