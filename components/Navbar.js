@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -7,19 +7,12 @@ import Sidebar from "./Sidebar";
 const Navbar = () => {
   return (
     <nav
-      className="lg:px-20 md:px-14 sm:px-8 px-5
-        lg:h-28 md:h-24 sm:h-20 h-16 gap-2
-        bg-amber-950 flex justify-between items-center"
+      className="lg:px-20 md:px-14 sm:px-8 px-5 lg:h-28 md:h-24 sm:h-20 h-16 gap-2 bg-amber-950 flex justify-between items-center"
     >
       <Sidebar />
 
       <div
-        className="logo font-extrabold text-lime-100
-        lg:text-5xl md:text-4xl text-2xl
-        [text-shadow:2px_2px_0px_#65a30d,4px_4px_0px_#3f6212,6px_6px_10px_rgba(0,0,0,0.5)]
-        transition-all duration-300 hover:text-lime-50 cursor-default
-        hover:[text-shadow:2px_2px_0px_#65a30d,4px_4px_0px_#3f6212,0_0_20px_rgba(190,242,100,0.7)]"
-      >
+        className="logo font-extrabold text-lime-100 lg:text-5xl md:text-4xl text-2xl [text-shadow:2px_2px_0px_#65a30d,4px_4px_0px_#3f6212,6px_6px_10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:text-lime-50 cursor-default hover:[text-shadow:2px_2px_0px_#65a30d,4px_4px_0px_#3f6212,0_0_20px_rgba(190,242,100,0.7)]">
         Clutter
       </div>
       <ul className="hidden sm:flex justify-center items-center md:gap-5 gap-3 font-bold text-amber-50">

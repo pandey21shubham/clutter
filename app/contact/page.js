@@ -1,65 +1,104 @@
-
 "use client";
 
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "General Inquiry",
+    message: "",
+  });
 
-    const [formData, setFormData] = useState({
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // const handleSubmit = (e) => {
+  //     e.preventDefault();
+  //     setFormData({
+  //         name: "",
+  //         email: "",
+  //         subject: "General Inquiry",
+  //         message: ""
+  //     })
+
+  //     // Connect this form to your backend or email service
+  //     // to actually deliver messages.
+  //     console.log("Contact form submitted:", formData);
+
+  //     toast.success('Message Sent', {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: false,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //     });
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to send your message.");
+      }
+
+      toast.success("Message sent successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: "light",
+      });
+
+      setFormData({
         name: "",
         email: "",
         subject: "General Inquiry",
         message: "",
-    });
-    
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setFormData({
-            name: "",
-            email: "",
-            subject: "General Inquiry",
-            message: ""
-        })
-        
-        // Connect this form to your backend or email service
-        // to actually deliver messages.
-        console.log("Contact form submitted:", formData);
+      });
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
 
-        toast.success('Message Sent', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });         
-    };
-    
-    return (
-        <main className="mx-auto w-full max-w-6xl px-5 py-12 text-emerald-900 sm:px-8">
-            <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick={false}
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-             />  
+      toast.error(error.message || "Something went wrong. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: "light",
+      });
+    }
+  };
+
+  return (
+    <main className="mx-auto w-full max-w-6xl px-5 py-12 text-emerald-900 sm:px-8">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
 
       {/* Page heading */}
       <section className="mb-12 text-center">
@@ -67,14 +106,15 @@ export default function Contact() {
           We're here to help
         </p>
 
-        <h1 className="text-4xl font-extrabold text-amber-500 md:text-5xl
-          [text-shadow:2px_2px_0px_#78350f,4px_4px_6px_rgba(0,0,0,0.7)]">
+        <h1
+          className="text-4xl font-extrabold text-amber-500 md:text-5xl
+          [text-shadow:2px_2px_0px_#78350f,4px_4px_6px_rgba(0,0,0,0.7)]"
+        >
           Contact Us
         </h1>
 
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-cyan-900">
-          Have a question, found a bug, or have an idea to make
-          Clutter better? 
+          Have a question, found a bug, or have an idea to make Clutter better?
         </p>
         <p className="mx-auto max-w-2xl text-lg leading-relaxed text-cyan-900">
           We'd love to hear from you.
@@ -83,30 +123,28 @@ export default function Contact() {
 
       {/* Main content */}
       <section className="grid grid-cols-1 items-start gap-8 lg:grid-cols-5">
-
         {/* Left information panel */}
         <div className="space-y-6 lg:col-span-2">
-
-          <div className="rounded-3xl border border-amber-800/50
-            bg-amber-950/40 p-7 md:p-8">
-
-            <h2 className="text-2xl font-bold text-slate-900">
-              Get in Touch
-            </h2>
+          <div
+            className="rounded-3xl border border-amber-800/50
+            bg-amber-950/40 p-7 md:p-8"
+          >
+            <h2 className="text-2xl font-bold text-slate-900">Get in Touch</h2>
 
             <p className="mt-4 leading-7 text-slate-800">
-              Whether you're having trouble shortening a URL or
-              simply want to share feedback, send us a message.
-              We're always looking for ways to improve your experience.
+              Whether you're having trouble shortening a URL or simply want to
+              share feedback, send us a message. We're always looking for ways
+              to improve your experience.
             </p>
 
             <div className="mt-8 space-y-6">
-
               {/* General inquiries */}
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center
+                <div
+                  className="flex h-12 w-12 shrink-0 items-center justify-center
                   rounded-2xl border border-amber-800/50 bg-amber-900/60
-                  text-xl text-amber-100">
+                  text-xl text-amber-100"
+                >
                   ✉
                 </div>
 
@@ -122,9 +160,11 @@ export default function Contact() {
 
               {/* Technical support */}
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center
+                <div
+                  className="flex h-12 w-12 shrink-0 items-center justify-center
                   rounded-2xl border border-amber-800/50 bg-amber-900/60
-                  text-xl text-amber-100">
+                  text-xl text-amber-100"
+                >
                   ⚙
                 </div>
 
@@ -140,9 +180,11 @@ export default function Contact() {
 
               {/* Feedback */}
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center
+                <div
+                  className="flex h-12 w-12 shrink-0 items-center justify-center
                   rounded-2xl border border-amber-800/50 bg-amber-900/60
-                  text-xl text-amber-100">
+                  text-xl text-amber-100"
+                >
                   ✨
                 </div>
 
@@ -155,26 +197,25 @@ export default function Contact() {
                   </p>
                 </div>
               </div>
-
             </div>
           </div>
 
           {/* Small brand card */}
-          <div className="rounded-3xl border border-amber-800/40
+          <div
+            className="rounded-3xl border border-amber-800/40
             bg-amber-950/40 p-6 transition-all duration-300
             hover:border-lime-700/50
-            hover:drop-shadow-[0_0_12px_rgba(190,242,100,0.12)]">
-
+            hover:drop-shadow-[0_0_12px_rgba(190,242,100,0.12)]"
+          >
             <h3 className="text-lg font-bold text-lime-900">
               ✂️ Let's cut the clutter.
             </h3>
 
             <p className="mt-2 leading-7 text-cyan-900">
-              Your feedback helps us make link sharing simpler,
-              cleaner, and more convenient.
+              Your feedback helps us make link sharing simpler, cleaner, and
+              more convenient.
             </p>
           </div>
-
         </div>
 
         {/* Contact form */}
@@ -185,7 +226,6 @@ export default function Contact() {
               bg-amber-950/40 p-6 shadow-xl shadow-black/10
               sm:p-8 md:p-10"
           >
-
             <h2 className="text-2xl font-bold text-slate-900">
               Send Us a Message
             </h2>
@@ -196,7 +236,6 @@ export default function Contact() {
 
             {/* Name and email */}
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-
               <div>
                 <label
                   htmlFor="name"
@@ -248,7 +287,6 @@ export default function Contact() {
                     transition-colors duration-300"
                 />
               </div>
-
             </div>
 
             {/* Subject */}
@@ -327,7 +365,6 @@ export default function Contact() {
                 hover:drop-shadow-[0_0_12px_rgba(180,83,9,0.7)]
                 cursor-pointer sm:w-auto"
             >
-                
               <span>Send Message</span>
 
               <svg
@@ -348,17 +385,14 @@ export default function Contact() {
                 <path d="m22 2-7 20-4-9-9-4Z" />
               </svg>
             </button>
-
           </form>
         </div>
-
       </section>
 
       {/* Footer note */}
       <p className="pt-10 pb-4 text-center text-sm text-cyan-900">
         Thanks for helping make Clutter better. ✨
       </p>
-
     </main>
   );
 }
